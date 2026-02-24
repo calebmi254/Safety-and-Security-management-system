@@ -31,10 +31,14 @@ app.get('/health', (req, res) => {
 
 // Import and use routes
 const authRoutes = require('./modules/auth/auth.routes');
+const officeRoutes = require('./modules/offices/offices.routes');
+const userRoutes = require('./modules/users/users.routes');
 const locationRoutes = require('./modules/locations/location.routes');
 const riskRoutes = require('./modules/risks/risk.routes');
 
 app.use('/api/auth', authRoutes);
+app.use('/api/offices', officeRoutes);
+app.use('/api/users', userRoutes);
 app.use('/api/locations', locationRoutes);
 app.use('/api/risks', riskRoutes);
 

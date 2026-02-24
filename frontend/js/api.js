@@ -21,7 +21,8 @@ const API = {
             const data = await response.json();
 
             if (!response.ok) {
-                throw new Error(data.error || 'Request failed');
+                const errorMsg = data.error?.message || data.error || 'Request failed';
+                throw new Error(errorMsg);
             }
             return data;
         } catch (error) {
@@ -33,6 +34,23 @@ const API = {
     // Specific endpoints
     auth: {
         register: (data) => API.request('/auth/register', { method: 'POST', body: JSON.stringify(data) }),
-        login: (credentials) => API.request('/auth/login', { method: 'POST', body: JSON.stringify(credentials) })
+        login: (credentials) => API.request('/auth/login', { method: 'POST', body: JSON.stringify(credentials) }),
+        changePassword: (newPassword) => API.request('/auth/change-password', { method: 'POST', body: JSON.stringify({ newPassword }) })
+    },
+
+    offices: {
+        getAll: () => API.request('/offices'),
+        getById: (id) => API.request(`/offices/${id}`),
+        create: (data) => API.request('/offices', { method: 'POST', body: JSON.stringify(data) }),
+        update: (id, data) => API.request(`/offices/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
+        delete: (id) => API.request(`/offices/${id}`, { method: 'DELETE' })
+    },
+
+    users: {
+        getAll: () => API.request('/users'),
+        getById: (id) => API.request(`/users/${id}`),
+        create: (data) => API.request('/users', { method: 'POST', body: JSON.stringify(data) }),
+        update: (id, data) => API.request(`/users/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
+        toggleStatus: (id, isActive) => API.request(`/users/${id}/status`, { method: 'PATCH', body: JSON.stringify({ isActive }) })
     }
 };

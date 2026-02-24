@@ -2,10 +2,17 @@ const { z } = require('zod');
 
 const registerSchema = z.object({
     body: z.object({
-        name: z.string().min(2),
+        firstName: z.string().min(2),
+        lastName: z.string().min(2),
         email: z.string().email(),
         password: z.string().min(8),
         organizationName: z.string().min(2),
+    }),
+});
+
+const changePasswordSchema = z.object({
+    body: z.object({
+        newPassword: z.string().min(8),
     }),
 });
 
@@ -19,4 +26,5 @@ const loginSchema = z.object({
 module.exports = {
     registerSchema,
     loginSchema,
+    changePasswordSchema,
 };
