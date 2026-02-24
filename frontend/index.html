@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureX | Safety First</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="bg-dark text-white">
+
+    <div class="container-fluid vh-100 p-0 overflow-hidden">
+        <div class="row h-100 g-0">
+
+            <!-- Column 1: 50% Hero Section -->
+            <div class="col-md-6 col-lg-6 hero-section d-flex align-items-center justify-content-center">
+                <div class="hero-content text-center p-5">
+                    <h1 class="display-1 fw-bold mb-4 text-gradient">SecureX</h1>
+                    <p class="lead text-secondary-emphasis">Advanced Security Management Systems. Ensuring safety
+                        through intelligence.</p>
+                </div>
+            </div>
+
+            <!-- Column 2: 30% Info Section -->
+            <div
+                class="col-md-3 col-lg-3 info-section border-start border-secondary border-opacity-10 d-flex align-items-center">
+                <div class="p-4">
+                    <div class="feature-card mb-4">
+                        <h4 class="text-primary mb-2">Location Intelligence</h4>
+                        <p class="small text-secondary">Real-time safety analysis based on your precise coordinates and
+                            local news feeds.</p>
+                    </div>
+                    <div class="feature-card mb-4">
+                        <h4 class="text-primary mb-2">Multi-Tenant Isolation</h4>
+                        <p class="small text-secondary">Enterprise-grade security ensuring your data stays within your
+                            organization.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4 class="text-primary mb-2">Risk Engine</h4>
+                        <p class="small text-secondary">Advanced scoring algorithm calculating environmental threats in
+                            seconds.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Column 3: 20% Auth Section -->
+            <div
+                class="col-md-3 col-lg-3 auth-section border-start border-secondary border-opacity-10 d-flex align-items-center">
+                <div class="w-100 p-4">
+                    <div id="auth-container" class="glass-card p-4">
+
+                        <!-- Tabs -->
+                        <div class="auth-tabs">
+                            <button id="tab-login" class="auth-tab active">Login</button>
+                            <button id="tab-register" class="auth-tab">Register</button>
+                        </div>
+
+                        <!-- Login Form -->
+                        <form id="login-form">
+                            <h3 class="h5 mb-4 fw-bold">Sign In</h3>
+                            <div class="mb-3">
+                                <label class="form-label small opacity-50">Email Address</label>
+                                <input type="email" class="form-control form-control-sm" id="login-email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label small opacity-50">Password</label>
+                                <input type="password" class="form-control form-control-sm" id="login-password"
+                                    required>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-sm w-100 mt-4">Access Portal</button>
+                        </form>
+
+                        <!-- Multi-step Registration Form -->
+                        <div id="register-container" class="d-none">
+
+                            <!-- Step 1: Company -->
+                            <form id="register-step-1">
+                                <h3 class="h5 mb-4 fw-bold">Register Company</h3>
+                                <div class="mb-3">
+                                    <label class="form-label small opacity-50">Organization Name</label>
+                                    <input type="text" class="form-control form-control-sm" id="reg-org-name" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label small opacity-50">Industry</label>
+                                    <input type="text" class="form-control form-control-sm" id="reg-org-industry"
+                                        placeholder="e.g. Finance, Tech" required>
+                                </div>
+                                <button type="button" id="next-to-admin" class="btn btn-primary btn-sm w-100 mt-4">Next:
+                                    Admin Details</button>
+                            </form>
+
+                            <!-- Step 2: Admin User -->
+                            <form id="register-step-2" class="d-none">
+                                <h3 class="h5 mb-4 fw-bold">Admin Account</h3>
+                                <div class="mb-3">
+                                    <label class="form-label small opacity-50">Full Name</label>
+                                    <input type="text" class="form-control form-control-sm" id="reg-admin-name"
+                                        required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label small opacity-50">Admin Email</label>
+                                    <input type="email" class="form-control form-control-sm" id="reg-admin-email"
+                                        required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label small opacity-50">Set Password</label>
+                                    <input type="password" class="form-control form-control-sm" id="reg-admin-password"
+                                        required>
+                                </div>
+                                <div class="d-flex gap-2 mt-4">
+                                    <button type="button" id="back-to-org"
+                                        class="btn btn-outline-secondary btn-sm flex-fill">Back</button>
+                                    <button type="submit" class="btn btn-primary btn-sm flex-fill">Complete
+                                        Setup</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div id="auth-status" class="mt-3 small text-center d-none"></div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/util.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+
+</html>

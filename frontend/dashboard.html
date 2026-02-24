@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | SecureX</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="bg-dark text-white">
+
+    <div class="dashboard-wrapper">
+
+        <!-- Sidebar -->
+        <aside id="sidebar" class="sidebar">
+
+            <a href="#" class="sidebar-logo">
+                <i class="bi bi-shield-check text-primary fs-3"></i>
+                <h2>SecureX</h2>
+            </a>
+
+            <button class="my-location-btn">
+                <i class="bi bi-geo-alt-fill"></i>
+                <span class="nav-text">My Location</span>
+            </button>
+
+            <nav class="sidebar-nav">
+
+                <a href="#" class="nav-item active">
+                    <i class="bi bi-house-door"></i>
+                    <span class="nav-text">Home</span>
+                </a>
+
+                <a href="#" class="nav-item">
+                    <i class="bi bi-bell"></i>
+                    <span class="nav-text">Alerts</span>
+                </a>
+
+                <div>
+                    <a href="#" class="nav-item d-flex justify-content-between align-items-center"
+                        data-bs-toggle="collapse" data-bs-target="#assets-submenu">
+                        <div class="d-flex align-items-center gap-3">
+                            <i class="bi bi-buildings"></i>
+                            <span class="nav-text">Company Assets</span>
+                        </div>
+                        <i class="bi bi-chevron-down nav-text fs-6 opacity-50"></i>
+                    </a>
+                    <div class="collapse nav-submenu" id="assets-submenu">
+                        <a href="#" class="submenu-item">Employees</a>
+                        <a href="#" class="submenu-item">Offices</a>
+                    </div>
+                </div>
+
+                <a href="#" class="nav-item">
+                    <i class="bi bi-globe"></i>
+                    <span class="nav-text">Global Analysis</span>
+                </a>
+
+            </nav>
+
+            <!-- Sidebar Footer -->
+            <div class="sidebar-footer">
+                <button title="Collapse Sidebar" id="toggle-sidebar">
+                    <i class="bi bi-list"></i>
+                </button>
+                <div class="vertical-divider"></div>
+                <button title="Logout" onclick="logout()">
+                    <i class="bi bi-box-arrow-right"></i>
+                </button>
+            </div>
+
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+
+            <header class="d-flex justify-content-between align-items-center mb-5">
+                <div>
+                    <h1 class="h3 fw-bold mb-1">Welcome back, <span id="user-name">Admin</span></h1>
+                    <p class="text-secondary small">Your organization: <span id="org-name"
+                            class="text-primary fw-600">Company X</span></p>
+                </div>
+                <div class="d-flex align-items-center gap-3">
+                    <div class="text-end">
+                        <p class="mb-0 small fw-bold" id="header-user-name">User Name</p>
+                        <p class="mb-0 x-small text-secondary" id="header-user-role">Administrator</p>
+                    </div>
+                    <div class="rounded-circle bg-primary d-flex align-items-center justify-content-center"
+                        style="width: 45px; height: 45px;">
+                        <i class="bi bi-person-fill fs-4"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content Placeholders -->
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="glass-card p-4 h-100">
+                        <div class="d-flex align-items-center gap-3 mb-3">
+                            <div class="bg-primary bg-opacity-10 p-2 rounded-3 text-primary">
+                                <i class="bi bi-geo-alt fs-4"></i>
+                            </div>
+                            <h5 class="mb-0 fw-bold">Current Location</h5>
+                        </div>
+                        <p class="text-secondary small">Accessing geolocation services...</p>
+                        <hr class="opacity-10">
+                        <p class="mb-0 small text-primary fw-bold">Not Monitored</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="glass-card p-4 h-100">
+                        <div class="d-flex align-items-center gap-3 mb-3">
+                            <div class="bg-warning bg-opacity-10 p-2 rounded-3 text-warning">
+                                <i class="bi bi-exclamation-triangle fs-4"></i>
+                            </div>
+                            <h5 class="mb-0 fw-bold">Active Alerts</h5>
+                        </div>
+                        <h2 class="fw-bold">0</h2>
+                        <p class="text-secondary x-small mt-2">Zero critical security alerts reported.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="glass-card p-4 h-100">
+                        <div class="d-flex align-items-center gap-3 mb-3">
+                            <div class="bg-success bg-opacity-10 p-2 rounded-3 text-success">
+                                <i class="bi bi-shield-check fs-4"></i>
+                            </div>
+                            <h5 class="mb-0 fw-bold">Security Status</h5>
+                        </div>
+                        <div class="d-flex align-items-baseline gap-2">
+                            <h2 class="fw-bold">100</h2>
+                            <span class="small text-secondary">%</span>
+                        </div>
+                        <p class="text-secondary x-small mt-2">All systems operating within normal parameters.</p>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+    </div>
+
+    <!-- Bootstrap JS + Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+    <script src="js/api.js"></script>
+    <script>
+        function logout() {
+            localStorage.removeItem('sx_token');
+            localStorage.removeItem('sx_user');
+            window.location.href = 'index.html';
+        }
+
+        // Sidebar Toggle
+        const toggleBtn = document.getElementById('toggle-sidebar');
+        const sidebar = document.getElementById('sidebar');
+
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+        });
+
+        // Hydrate Dashboard
+        document.addEventListener('DOMContentLoaded', () => {
+            const user = JSON.parse(localStorage.getItem('sx_user'));
+            if (!user) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            document.getElementById('user-name').textContent = user.name;
+            document.getElementById('header-user-name').textContent = user.name;
+            document.getElementById('header-user-role').textContent = user.role.charAt(0).toUpperCase() + user.role.slice(1);
+        });
+    </script>
+</body>
+
+</html>
