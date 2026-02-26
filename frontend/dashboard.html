@@ -83,10 +83,26 @@
         <main class="main-content">
 
             <header class="d-flex justify-content-between align-items-center mb-5">
-                <div>
-                    <h1 class="h3 fw-bold mb-1">Welcome back, <span id="user-name">Admin</span></h1>
-                    <p class="text-secondary small">Your organization: <span id="org-name"
-                            class="text-primary fw-600">SecureX Enterprise</span></p>
+                <div class="d-flex align-items-center gap-4">
+                    <div>
+                        <h1 class="h3 fw-bold mb-1">Welcome back, <span id="user-name">Admin</span></h1>
+                        <p class="text-secondary small mb-0">Your organization: <span id="org-name"
+                                class="text-primary fw-600">SecureX Enterprise</span></p>
+                    </div>
+
+                    <!-- Integrated Mini Status Indicators (No boxes) -->
+                    <div class="d-flex gap-4 ms-3 border-start border-white border-opacity-10 ps-4">
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="bi bi-exclamation-triangle text-warning x-small"></i>
+                            <span class="x-small text-secondary text-uppercase fw-bold letter-spacing-1">Alerts: <span
+                                    class="text-white">0</span></span>
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="bi bi-shield-check text-success x-small"></i>
+                            <span class="x-small text-secondary text-uppercase fw-bold letter-spacing-1">Security Score:
+                                <span class="text-white">100%</span></span>
+                        </div>
+                    </div>
                 </div>
                 <div class="d-flex align-items-center gap-3">
                     <div class="text-end">
@@ -102,46 +118,101 @@
 
             <!-- Dynamic Content Container -->
             <div id="dashboard-content">
-                <!-- Dashboard Content Default -->
-                <div class="row g-4">
-                    <div class="col-md-4">
-                        <div class="glass-card p-4 h-100">
-                            <div class="d-flex align-items-center gap-3 mb-3">
-                                <div class="bg-primary bg-opacity-10 p-2 rounded-3 text-primary">
-                                    <i class="bi bi-geo-alt fs-4"></i>
-                                </div>
-                                <h5 class="mb-0 fw-bold">Current Location</h5>
-                            </div>
-                            <p class="text-secondary small">Accessing geolocation services...</p>
-                            <hr class="opacity-10">
-                            <p class="mb-0 small text-primary fw-bold">Not Monitored</p>
+
+                <!-- Top Row: Minimal Location Monitoring (Centered) -->
+                <div class="row g-0 mb-5 justify-content-center">
+                    <div
+                        class="col-lg-5 d-flex flex-column justify-content-center px-4 mb-4 mb-lg-0 border-end border-white border-opacity-10 text-center">
+                        <div class="d-flex align-items-center justify-content-center gap-2 mb-3">
+                            <i class="bi bi-geo-alt text-primary fs-5"></i>
+                            <h6 class="mb-0 fw-bold text-uppercase x-small letter-spacing-2 opacity-75">Spatial
+                                Awareness</h6>
+                        </div>
+                        <div class="location-display-text">
+                            <p class="text-secondary small mb-0">No active signal. Trigger scan to begin.</p>
+                        </div>
+                        <div class="mt-3">
+                            <p class="mb-0 small text-primary fw-bold location-status-text">
+                                <i class="bi bi-broadcast opacity-50 me-2"></i>Standby
+                            </p>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="glass-card p-4 h-100">
-                            <div class="d-flex align-items-center gap-3 mb-3">
-                                <div class="bg-warning bg-opacity-10 p-2 rounded-3 text-warning">
-                                    <i class="bi bi-exclamation-triangle fs-4"></i>
-                                </div>
-                                <h5 class="mb-0 fw-bold">Active Alerts</h5>
+
+                    <div class="col-lg-5 px-4">
+                        <div class="location-forms mx-auto" style="max-width: 500px; text-align: left;">
+                            <div class="d-flex align-items-center justify-content-between mb-3">
+                                <span class="x-small text-secondary text-uppercase fw-bold letter-spacing-1">Location
+                                    Control</span>
+                                <button class="btn btn-sm btn-link text-primary p-0 text-decoration-none"
+                                    onclick="getLocation()" title="Auto-Capture">
+                                    <i class="bi bi-crosshair me-1"></i> Use GPS Target
+                                </button>
                             </div>
-                            <h2 class="fw-bold">0</h2>
-                            <p class="text-secondary x-small mt-2">Zero critical security alerts reported.</p>
+
+                            <div class="input-group input-group-sm mb-2">
+                                <span
+                                    class="input-group-text bg-transparent border-secondary border-opacity-25 text-secondary"><i
+                                        class="bi bi-search"></i></span>
+                                <input type="text" id="loc-address-search"
+                                    class="form-control bg-transparent border-secondary border-opacity-25"
+                                    placeholder="Search global coordinates...">
+                                <button class="btn btn-outline-primary border-opacity-25" type="button"
+                                    onclick="searchLocation()">Find</button>
+                            </div>
+
+                            <div class="row g-2 mb-2">
+                                <div class="col-6">
+                                    <input type="number" step="any" id="loc-latitude"
+                                        class="form-control form-control-sm bg-transparent border-secondary border-opacity-25"
+                                        placeholder="Lat">
+                                </div>
+                                <div class="col-6">
+                                    <input type="number" step="any" id="loc-longitude"
+                                        class="form-control form-control-sm bg-transparent border-secondary border-opacity-25"
+                                        placeholder="Lng">
+                                </div>
+                            </div>
+
+                            <div class="d-flex gap-2 align-items-center">
+                                <input type="text" id="loc-address"
+                                    class="form-control form-control-sm bg-transparent border-secondary border-opacity-25"
+                                    placeholder="Captured address details...">
+                                <button class="btn btn-primary btn-sm px-4 fw-bold" onclick="saveLocation()"
+                                    style="white-space: nowrap;">
+                                    Sync Spatial Record
+                                </button>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="glass-card p-4 h-100">
-                            <div class="d-flex align-items-center gap-3 mb-3">
-                                <div class="bg-success bg-opacity-10 p-2 rounded-3 text-success">
-                                    <i class="bi bi-shield-check fs-4"></i>
-                                </div>
-                                <h5 class="mb-0 fw-bold">Security Status</h5>
-                            </div>
-                            <div class="d-flex align-items-baseline gap-2">
-                                <h2 class="fw-bold">100</h2>
-                                <span class="small text-secondary">%</span>
-                            </div>
-                            <p class="text-secondary x-small mt-2">All systems operating within normal parameters.</p>
+                </div>
+
+                <!-- Analysis Row: 30 / 35 / 35 with border dividers -->
+                <div class="row g-0 h-100">
+                    <div class="col-lg-4 px-4 text-center" style="width: 30%;">
+                        <h6 class="fw-bold mb-4 opacity-50 text-uppercase x-small letter-spacing-2">Ongoing Incidents
+                        </h6>
+                        <div class="tab-placeholder-content opacity-25">
+                            <i class="bi bi-shield-exclamation fs-2 mb-3"></i>
+                            <p class="x-small">Monitoring secure perimeter...</p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 px-4 border-start border-white border-opacity-10 text-center"
+                        style="width: 35%;">
+                        <h6 class="fw-bold mb-4 opacity-50 text-uppercase x-small letter-spacing-2">Incident Detail</h6>
+                        <div class="tab-placeholder-content opacity-25">
+                            <i class="bi bi-journal-text fs-2 mb-3"></i>
+                            <p class="x-small">Awaiting data selection</p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 px-4 border-start border-white border-opacity-10 text-center"
+                        style="width: 35%;">
+                        <h6 class="fw-bold mb-4 opacity-50 text-uppercase x-small letter-spacing-2">Incident Analysis
+                        </h6>
+                        <div class="tab-placeholder-content opacity-25">
+                            <i class="bi bi-bar-chart-line fs-2 mb-3"></i>
+                            <p class="x-small">Heuristic engine idle</p>
                         </div>
                     </div>
                 </div>
@@ -347,6 +418,7 @@
     <script src="js/auth.js"></script>
     <script src="js/offices.js"></script>
     <script src="js/employees.js"></script>
+    <script src="js/locations.js"></script>
 
     <script>
         function logout() {

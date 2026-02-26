@@ -5,5 +5,7 @@ const { authMiddleware, tenantMiddleware } = require('../../middleware/auth.midd
 
 router.post('/', authMiddleware, tenantMiddleware, locationController.logLocation);
 router.get('/', authMiddleware, tenantMiddleware, locationController.getLocations);
+router.get('/search', authMiddleware, locationController.searchLocation);
+router.get('/reverse', authMiddleware, locationController.reverseGeocode);
 
 module.exports = router;

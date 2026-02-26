@@ -52,5 +52,14 @@ const API = {
         create: (data) => API.request('/users', { method: 'POST', body: JSON.stringify(data) }),
         update: (id, data) => API.request(`/users/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
         toggleStatus: (id, isActive) => API.request(`/users/${id}/status`, { method: 'PATCH', body: JSON.stringify({ isActive }) })
-    }
+    },
+
+    locations: {
+        getRecent: () => API.request('/locations'),
+        create: (data) => API.request('/locations', { method: 'POST', body: JSON.stringify(data) })
+    },
+
+    // Generic helpers for flexibility
+    get: (endpoint) => API.request(endpoint, { method: 'GET' }),
+    post: (endpoint, data) => API.request(endpoint, { method: 'POST', body: JSON.stringify(data) })
 };

@@ -4,6 +4,8 @@
     --glass-bg: rgba(255, 255, 255, 0.03);
     --glass-border: rgba(255, 255, 255, 0.1);
     --text-gradient: linear-gradient(135deg, #0d6efd 0%, #00d2ff 100%);
+    --letter-spacing-1: 1px;
+    --letter-spacing-2: 2px;
 }
 
 body {
@@ -19,6 +21,18 @@ body {
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+.letter-spacing-1 {
+    letter-spacing: var(--letter-spacing-1);
+}
+
+.letter-spacing-2 {
+    letter-spacing: var(--letter-spacing-2);
+}
+
+.x-small {
+    font-size: 0.7rem;
 }
 
 /* 3-Column Width Overrides */
