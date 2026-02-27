@@ -1,4 +1,4 @@
-const API = {
+const api = {
     // Config
     baseUrl: 'http://localhost:5000/api',
 
@@ -33,33 +33,39 @@ const API = {
 
     // Specific endpoints
     auth: {
-        register: (data) => API.request('/auth/register', { method: 'POST', body: JSON.stringify(data) }),
-        login: (credentials) => API.request('/auth/login', { method: 'POST', body: JSON.stringify(credentials) }),
-        changePassword: (newPassword) => API.request('/auth/change-password', { method: 'POST', body: JSON.stringify({ newPassword }) })
+        register: (data) => api.request('/auth/register', { method: 'POST', body: JSON.stringify(data) }),
+        login: (credentials) => api.request('/auth/login', { method: 'POST', body: JSON.stringify(credentials) }),
+        changePassword: (newPassword) => api.request('/auth/change-password', { method: 'POST', body: JSON.stringify({ newPassword }) })
     },
 
     offices: {
-        getAll: () => API.request('/offices'),
-        getById: (id) => API.request(`/offices/${id}`),
-        create: (data) => API.request('/offices', { method: 'POST', body: JSON.stringify(data) }),
-        update: (id, data) => API.request(`/offices/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
-        delete: (id) => API.request(`/offices/${id}`, { method: 'DELETE' })
+        getAll: () => api.request('/offices'),
+        getById: (id) => api.request(`/offices/${id}`),
+        create: (data) => api.request('/offices', { method: 'POST', body: JSON.stringify(data) }),
+        update: (id, data) => api.request(`/offices/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
+        delete: (id) => api.request(`/offices/${id}`, { method: 'DELETE' })
     },
 
     users: {
-        getAll: () => API.request('/users'),
-        getById: (id) => API.request(`/users/${id}`),
-        create: (data) => API.request('/users', { method: 'POST', body: JSON.stringify(data) }),
-        update: (id, data) => API.request(`/users/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
-        toggleStatus: (id, isActive) => API.request(`/users/${id}/status`, { method: 'PATCH', body: JSON.stringify({ isActive }) })
+        getAll: () => api.request('/users'),
+        getById: (id) => api.request(`/users/${id}`),
+        create: (data) => api.request('/users', { method: 'POST', body: JSON.stringify(data) }),
+        update: (id, data) => api.request(`/users/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
+        toggleStatus: (id, isActive) => api.request(`/users/${id}/status`, { method: 'PATCH', body: JSON.stringify({ isActive }) })
     },
 
     locations: {
-        getRecent: () => API.request('/locations'),
-        create: (data) => API.request('/locations', { method: 'POST', body: JSON.stringify(data) })
+        getRecent: () => api.request('/locations'),
+        create: (data) => api.request('/locations', { method: 'POST', body: JSON.stringify(data) })
+    },
+
+    // Public Intelligence Overview
+    public: {
+        getSignals: (params) => api.request('/public/signals?' + new URLSearchParams(params).toString()),
+        getEvents: (params) => api.request('/public/events?' + new URLSearchParams(params).toString()),
     },
 
     // Generic helpers for flexibility
-    get: (endpoint) => API.request(endpoint, { method: 'GET' }),
-    post: (endpoint, data) => API.request(endpoint, { method: 'POST', body: JSON.stringify(data) })
+    get: (endpoint) => api.request(endpoint, { method: 'GET' }),
+    post: (endpoint, data) => api.request(endpoint, { method: 'POST', body: JSON.stringify(data) })
 };

@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
     async function renderEmployeesList() {
         const tbody = document.getElementById('employees-table-body');
         try {
-            const result = await API.users.getAll();
+            const result = await api.users.getAll();
             const users = result.data;
 
             if (users.length === 0) {
@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Fetch offices for display names
-            const officesRes = await API.offices.getAll();
+            const officesRes = await api.offices.getAll();
             const officesMap = Object.fromEntries(officesRes.data.map(o => [o.id, o.office_name]));
 
             tbody.innerHTML = users.map(user => `
@@ -163,9 +163,9 @@ document.addEventListener('DOMContentLoaded', () => {
         pane.innerHTML = `<div class="text-center py-5"><div class="spinner-border text-primary"></div></div>`;
 
         try {
-            const result = await API.users.getById(id);
+            const result = await api.users.getById(id);
             const user = result.data;
-            const officesRes = await API.offices.getAll();
+            const officesRes = await api.offices.getAll();
             const office = officesRes.data.find(o => o.id === user.office_id);
 
             pane.innerHTML = `
@@ -234,12 +234,12 @@ document.addEventListener('DOMContentLoaded', () => {
         modalTitle.textContent = id ? 'Edit Employee account' : 'Register New Employee';
 
         // Populate Office Select
-        const officesRes = await API.offices.getAll();
+        const officesRes = await api.offices.getAll();
         officeSelect.innerHTML = '<option value="">No Office Assigned</option>' +
             officesRes.data.map(o => `<option value="${o.id}">${o.office_name}</option>`).join('');
 
         if (id) {
-            const res = await API.users.getById(id);
+            const res = await api.users.getById(id);
             const data = res.data;
             Object.keys(data).forEach(key => {
                 const input = employeeForm.elements[key];
@@ -268,9 +268,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             if (currentEditId) {
-                await API.users.update(currentEditId, data);
+                await api.users.update(currentEditId, data);
             } else {
-                await API.users.create(data);
+                await api.users.create(data);
             }
             showToast(currentEditId ? 'Employee record updated' : 'New employee registered successfully');
             employeeModal.hide();
@@ -287,7 +287,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.toggleStatus = async (id, isActive) => {
         if (confirm(`Are you sure you want to ${isActive ? 'activate' : 'deactivate'} this account?`)) {
             try {
-                await API.users.toggleStatus(id, isActive);
+                await api.users.toggleStatus(id, isActive);
                 showToast(`Employee account ${isActive ? 'activated' : 'deactivated'}`);
                 renderEmployeesList();
                 viewEmployeeDetails(id);
@@ -310,7 +310,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             try {
-                await API.auth.changePassword(newPassword);
+                await api.auth.changePassword(newPassword);
                 const resetModal = bootstrap.Modal.getInstance(document.getElementById('passwordResetModal'));
                 resetModal.hide();
                 // Clean URL

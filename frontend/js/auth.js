@@ -108,10 +108,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             try {
                 showStatus('Initializing secure environment...', 'text-primary');
-                await API.auth.register(finalData);
+                await api.auth.register(finalData);
                 showStatus('Registration successful! Authenticating...', 'text-success');
 
-                const loginResult = await API.auth.login({ email, password });
+                const loginResult = await api.auth.login({ email, password });
                 localStorage.setItem('sx_token', loginResult.data.token);
                 localStorage.setItem('sx_user', JSON.stringify(loginResult.data.user));
 
@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             try {
                 showStatus('Establishing secure connection...', 'text-primary');
-                const result = await API.auth.login({ email, password });
+                const result = await api.auth.login({ email, password });
 
                 localStorage.setItem('sx_token', result.data.token);
                 localStorage.setItem('sx_user', JSON.stringify(result.data.user));

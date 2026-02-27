@@ -50,7 +50,7 @@ const LocationManager = {
         if (!address) return;
 
         try {
-            const data = await API.get(`/locations/search?q=${encodeURIComponent(address)}`);
+            const data = await api.get(`/locations/search?q=${encodeURIComponent(address)}`);
 
             if (data && data.length > 0) {
                 const result = data[0];
@@ -75,7 +75,7 @@ const LocationManager = {
      */
     reverseGeocode: async function (lat, lon) {
         try {
-            const data = await API.get(`/locations/reverse?lat=${lat}&lon=${lon}`);
+            const data = await api.get(`/locations/reverse?lat=${lat}&lon=${lon}`);
             if (data && data.display_name) {
                 this.currentAddress = data.display_name;
             }
@@ -105,7 +105,7 @@ const LocationManager = {
         }
 
         try {
-            const response = await API.post('/locations', payload);
+            const response = await api.post('/locations', payload);
             if (response.data) {
                 showToast('Location saved successfully', 'success');
                 this.updateDashboardCard(payload);

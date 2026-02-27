@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
     async function renderOfficesList() {
         const tbody = document.getElementById('offices-table-body');
         try {
-            const result = await API.offices.getAll();
+            const result = await api.offices.getAll();
             const offices = result.data;
 
             if (offices.length === 0) {
@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
         pane.innerHTML = `<div class="text-center py-5"><div class="spinner-border text-primary"></div></div>`;
 
         try {
-            const result = await API.offices.getById(id);
+            const result = await api.offices.getById(id);
             const office = result.data;
 
             pane.innerHTML = `
@@ -227,7 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (id) {
             // Fetch data and populate
-            API.offices.getById(id).then(res => {
+            api.offices.getById(id).then(res => {
                 const data = res.data;
                 Object.keys(data).forEach(key => {
                     const input = officeForm.elements[key];
@@ -263,9 +263,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             if (currentEditId) {
-                await API.offices.update(currentEditId, data);
+                await api.offices.update(currentEditId, data);
             } else {
-                await API.offices.create(data);
+                await api.offices.create(data);
             }
             showToast(currentEditId ? 'Office asset updated' : 'New office registered successfully');
             officeModal.hide();
@@ -284,7 +284,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.deleteOffice = async (id) => {
         if (confirm('Are you sure you want to remove this office asset?')) {
             try {
-                await API.offices.delete(id);
+                await api.offices.delete(id);
                 showToast('Office asset removed successfully');
                 renderOfficesList();
             } catch (error) {

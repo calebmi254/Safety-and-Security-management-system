@@ -35,12 +35,18 @@ const officeRoutes = require('./modules/offices/offices.routes');
 const userRoutes = require('./modules/users/users.routes');
 const locationRoutes = require('./modules/locations/location.routes');
 const riskRoutes = require('./modules/risks/risk.routes');
+const eventsRoutes = require('./modules/events/events.routes');
+const publicRoutes = require('./modules/public.routes');
+
 
 app.use('/api/auth', authRoutes);
 app.use('/api/offices', officeRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/locations', locationRoutes);
 app.use('/api/risks', riskRoutes);
+app.use('/api/events', eventsRoutes);
+app.use('/api/public', publicRoutes);
+
 
 // Error Handling (Must be last)
 app.use(errorMiddleware);
